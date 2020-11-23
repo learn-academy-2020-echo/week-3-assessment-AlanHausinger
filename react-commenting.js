@@ -8,7 +8,7 @@
 // src/App.js
 
 import React, { Component } from 'react'
-// 1)
+// 1)We're importing a child component dice to be used in the render
 import Dice from './Dice'
 import Log from './Log'
 
@@ -21,10 +21,11 @@ import dice5 from '../assets/dice-5.png'
 import dice6 from '../assets/dice-6.png'
 
 class Board extends Component{
-  // 2)
+  // 2)Creates an object to be used in the parent to be called on from the child and
+  // creates an ability to use the current value of this.state
   constructor(props){
     super(props)
-    // 3)
+    // 3) Initializing the state and to be used and declares its value or item
     this.state = {
       rollImages: [dice1, dice2, dice3, dice4, dice5, dice6],
       currentPic: dice,
@@ -33,23 +34,24 @@ class Board extends Component{
   }
 
   handleRoll = () => {
-    // 4)
+    // 4) Destructres this.state to manipulate the values of rollImages and dicelog
     let { rollImages, diceLog } = this.state
-    // 5)
+    // 5)Declaring a variable (randomNum)to round up to the nearest whole number number of length of rollImages
     let randomNum = Math.ceil(Math.random() * rollImages.length)
     let newRoll = rollImages[randomNum]
-    // 6)
+    // 6) Adds a new setstat of currentPic to log a new roll
     this.setState({ currentPic: newRoll, diceLog: [... diceLog, newRoll] })
   }
 
-  // 7)
+  // 7) The render is rendering the react element/ elements into the DOM
+  // to display the specified HTML elements onto the webpage
   render(){
     const { currentPic, diceLog } = this.state
     return(
       <div id="board-container">
-        // 8)
+        // 8) Dice is being called to be rendered on the webpage
         <Dice
-          // 9)
+          // 9) Calling for the instance of this.handleroll to be displayed
           roll={ this.handleRoll }
           currentPic={ currentPic }
         />
@@ -61,5 +63,5 @@ class Board extends Component{
   }
 }
 
-// 10)
+// 10) Exports all of the data to react in out class board to return to react and update as a component
 export default Board
